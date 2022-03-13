@@ -1,44 +1,29 @@
-let img=document.createElement("img");
-img.src="https://wallpapercave.com/wp/wp7812715.jpg";
-img.style.width="1250px"
-img.style.height="500px"
-document.body.append(img);
+const users=document.createElement('input');
+users.type="text";
+users.placeholder="Enter your name";
+document.body.appendChild(users);
+const url=`https://api.nationalize.io?name=${users}`
 
-
-let input = document.createElement("input");
-input.type = "text";
-input.className = "input"
-input.placeholder="Enter your Name";
-document.body.appendChild(input);
-
-let btn=document.createElement("button");
-btn.className="btn"
-let dis=document.createTextNode('Get the result');
-btn.appendChild(dis);
-document.body.appendChild(btn);
-
-let data=document.getElementById("data");
-const url=" http://localhost:3000/data1";
-btn.addEventListener("click",async function()
+let result=async function()
 {
-     try{
-         let res= await fetch(url);
-         let obj=await res.json();
-          console.log();
-          obj.forEach(element => {
-            
-           data.innerHTML=`
-           <div> Name: ${element.name}</div>
-           <div> Country:${element.country[0].country_id}</div>
-           <div> Propability:${element.country[0].probability}</div>`   
-                    
-          });
+try{
+   let res= await fetch(url);
+   let obj=await res.json();
+    console.log(obj);
+    if(users.value==url){
+       console.log('correct');
     }
-    
-    
-     catch(err)
-     {
-         document.write("Error");
-     }
-});
-
+      
+     
+` <div> Name: ${obj.name}</div>`.innerHTML;
+ console.log(`Country:${obj.country[0].country_id}`)
+ console.log(`country${obj.country[1].country_id}`)
+ console.log( `Propability:${obj.country[0].probability} ` ) 
+              
+      
+}
+catch(err){
+   console.log(err)
+}
+}
+result();
